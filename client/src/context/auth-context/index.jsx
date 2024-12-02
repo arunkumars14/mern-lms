@@ -1,6 +1,7 @@
 import { Skeleton } from "@/components/ui/skeleton";
 import { initialSignInFormData, initialSignUpFormData } from "@/config";
 import { checkAuthService, loginInService, registerService } from "@/services";
+import { Loader } from "lucide-react";
 import { createContext, useEffect, useState } from "react";
 
 export const AuthContext = createContext(null)
@@ -88,6 +89,13 @@ export default function AuthProvider({ children }) {
         checkAuthUser()
     }, [])
 
+    if(loading){
+        return (
+            <div className="flex h-screen w-full justify-center items-center">
+              <Loader size={130} className='animate-spin'/>
+            </div>
+          )
+    }
 
 
     return <AuthContext.Provider value={{ signInFormData, setSignInFormData, signUpFormData, setSignUpFormData, handleRegisterUser, handleLoginUser, auth, resetCredentials, activeTab, setActiveTab, loading }}>
