@@ -18,9 +18,9 @@ import { Loader } from 'lucide-react'
 
 function App() {
 
-  const { auth } = useContext(AuthContext)
+  const { auth, loading } = useContext(AuthContext)
 
-  if(!auth){
+  if(loading){
     return (
       <div className="flex h-screen w-full justify-center items-center">
         <Loader size={130} className='animate-spin'/>

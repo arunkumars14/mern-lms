@@ -90,7 +90,7 @@ export default function AuthProvider({ children }) {
 
 
 
-    return <AuthContext.Provider value={{ signInFormData, setSignInFormData, signUpFormData, setSignUpFormData, handleRegisterUser, handleLoginUser, auth, resetCredentials, activeTab, setActiveTab }}>
+    return <AuthContext.Provider value={{ signInFormData, setSignInFormData, signUpFormData, setSignUpFormData, handleRegisterUser, handleLoginUser, auth, resetCredentials, activeTab, setActiveTab, loading }}>
         {loading ? <Skeleton /> : children} 
     </AuthContext.Provider>
 }
