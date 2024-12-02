@@ -18,8 +18,10 @@ function InstructorProvider({ children }) {
 
     const [instructorCourseList, setInstructorCourseList] = useState([])
 
+    const [student, setStudent] = useState([]);
+
     return (
-        <InstructorContext.Provider value={{couserLandingFormData, setCouserLandingFormData, courseCurriculumFormData, setCourseCurriculumFormData, mediaUploadProgress, setMediaUploadProgress, mediaUploadProgressPercentage, setMediaUploadProgressPercentage, instructorCourseList, setInstructorCourseList, currentEditedCourseId, setCurrentEditedCourseId}}>
+        <InstructorContext.Provider value={{couserLandingFormData, setCouserLandingFormData, courseCurriculumFormData, setCourseCurriculumFormData, mediaUploadProgress, setMediaUploadProgress, mediaUploadProgressPercentage, setMediaUploadProgressPercentage, instructorCourseList, setInstructorCourseList, currentEditedCourseId, setCurrentEditedCourseId, student, setStudent}}>
             {children}
         </InstructorContext.Provider>
     )

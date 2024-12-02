@@ -111,7 +111,7 @@ function StudentViewCoursesPage() {
             </h1>
 
             <div className="flex flex-col md:flex-row gap-4">
-                <aside className="w-full md:w-64 space-y-4">
+                <aside className="w-full md:w-64 space-y-4 h-[580px] overflow-y-scroll no-scrollbar">
                     <div className="">
                         {
                             Object.keys(filterOptions).map(keyItem => (<div className='p-4 border-b' key={keyItem}>
@@ -152,7 +152,7 @@ function StudentViewCoursesPage() {
                         <span className="text-sm text-black font-bold">{studentViewCoursesList.length} results</span>
                     </div>
 
-                    <div className="space-y-4">
+                    <div className="space-y-4 h-[520px] overflow-y-scroll no-scrollbar">
                         {
                             studentViewCoursesList && studentViewCoursesList.length > 0 ? studentViewCoursesList.map(courseItem => (<Card key={courseItem?._id} className="cursor-pointer" onClick={() => handleCourseNavigate(courseItem?._id)}>
                                 <CardContent className="flex gap-4 p-4">

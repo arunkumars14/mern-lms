@@ -14,7 +14,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 function AddNewCoursePage() {
     const params = useParams()
 
-    const { couserLandingFormData, courseCurriculumFormData, setCouserLandingFormData, setCourseCurriculumFormData, currentEditedCourseId, setCurrentEditedCourseId } = useContext(InstructorContext)
+    const { couserLandingFormData, courseCurriculumFormData, setCouserLandingFormData, setCourseCurriculumFormData, currentEditedCourseId, setCurrentEditedCourseId, student, setStudent } = useContext(InstructorContext)
 
     const { auth } = useContext(AuthContext)
 
@@ -56,7 +56,7 @@ function AddNewCoursePage() {
             instructorName: auth?.user?.userName,
             date: new Date(),
             ...couserLandingFormData,
-            students: [],
+            students: student,
             curriculum: courseCurriculumFormData,
             isPublished: true,
         }
@@ -83,6 +83,7 @@ function AddNewCoursePage() {
 
             setCouserLandingFormData(setCourseFormData)
             setCourseCurriculumFormData(response?.data?.curriculum)
+            setStudent(response?.data?.students)
         }
     }
 

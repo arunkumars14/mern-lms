@@ -14,10 +14,19 @@ import StudentViewCourseDetailsPage from './pages/student/course-details'
 import PaypalReturnPage from './pages/student/payment-return'
 import StudentCoursesPage from './pages/student/student-courses'
 import StudentViewCourseProgressPage from './pages/student/course-progress'
+import { Loader } from 'lucide-react'
 
 function App() {
 
   const { auth } = useContext(AuthContext)
+
+  if(!auth){
+    return (
+      <div className="flex h-screen w-full justify-center items-center">
+        <Loader size={130} className='animate-spin'/>
+      </div>
+    )
+  }
 
   return (
     <>

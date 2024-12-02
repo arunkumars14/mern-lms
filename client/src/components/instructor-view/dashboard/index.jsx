@@ -73,7 +73,7 @@ function InstructorDashboard({ listOfCourses }) {
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="overflow-x-auto">
+          <div className="overflow-x-auto h-[360px] overflow-y-scroll no-scrollbar">
             <Table className="w-full">
               <TableHeader>
                 <TableRow>

@@ -29,7 +29,7 @@ function InstructorCourses({ listOfCourses }) {
                 </Button>
             </CardHeader>
             <CardContent>
-                <div className="overflow-x-auto">
+                <div className="overflow-x-auto h-[470px] overflow-y-scroll no-scrollbar">
                     <Table>
                         <TableHeader>
                             <TableRow>
