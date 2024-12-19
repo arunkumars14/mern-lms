@@ -8,6 +8,7 @@ import { GraduationCap } from 'lucide-react'
 import React, { useContext, useState } from 'react'
 import { Link } from 'react-router-dom'
 
+
 function AuthPage() {
 
     const {signInFormData, setSignInFormData, signUpFormData, setSignUpFormData, handleRegisterUser, handleLoginUser, activeTab, setActiveTab} = useContext(AuthContext)

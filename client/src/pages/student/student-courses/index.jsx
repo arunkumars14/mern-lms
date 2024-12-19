@@ -7,25 +7,37 @@ import { fetchStudentBoughtCoursesServices } from '@/services'
 import { Play } from 'lucide-react'
 import React, { useContext, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import load from "../../../../public/load.gif"
 
 function StudentCoursesPage() {
-    const {studentBoughtCoursesList, setStudentBoughtCoursesList} = useContext(StudentContext)
+    const { studentBoughtCoursesList, setStudentBoughtCoursesList, loadingStateBought, setLoadingStateBought } = useContext(StudentContext)
 
-    const {auth} = useContext(AuthContext)
+    const { auth } = useContext(AuthContext)
 
     const navigate = useNavigate()
 
     async function fetchStudentBoughtCourses() {
         const response = await fetchStudentBoughtCoursesServices(auth?.user?._id)
 
-        if(response?.success){
-            setStudentBoughtCoursesList(response?.data)
+        if (response?.success) {
+            setStudentBoughtCoursesList(response?.data);
+            setLoadingStateBought(false)
         }
     }
 
-    useEffect(()=> {
+    useEffect(() => {
         fetchStudentBoughtCourses()
     }, [])
+
+    if (loadingStateBought) {
+        return (
+            <div className="flex flex-col h-[100vh] w-full justify-center items-center">
+                <img src={load} alt="loading" className="w-[150px]" loading="lazy" />
+
+                <h1 className="font-bold text-[rgb(95,111,255)] text-md">Learning Management System</h1>
+            </div>
+        )
+    }
 
 
     return (
@@ -43,13 +55,13 @@ function StudentCoursesPage() {
                         </CardContent>
 
                         <CardFooter>
-                            <Button className="flex-1" onClick={()=>navigate(`/course-progress/${course?.courseId}`)}>
-                                <Play className='mr-2 h-4 w-4'/>
+                            <Button className="flex-1" onClick={() => navigate(`/course-progress/${course?.courseId}`)}>
+                                <Play className='mr-2 h-4 w-4' />
                                 Start Watching
                             </Button>
                         </CardFooter>
-                        
-                    </Card>)  : <h1 className="text-3xl font-bold">No Courses Found</h1>
+
+                    </Card>) : <h1 className="text-3xl font-bold">No Courses Found</h1>
                 }
             </div>
         </div>

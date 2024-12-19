@@ -15,17 +15,22 @@ import PaypalReturnPage from './pages/student/payment-return'
 import StudentCoursesPage from './pages/student/student-courses'
 import StudentViewCourseProgressPage from './pages/student/course-progress'
 import { Loader } from 'lucide-react'
+import load from "../public/load.gif"
 
 function App() {
 
   const { auth, loading } = useContext(AuthContext)
 
-  if(loading){
+  if (loading) {
+
     return (
-      <div className="flex h-screen w-full justify-center items-center">
-        <Loader size={130} className='animate-spin'/>
+      <div className="flex flex-col h-[100vh] w-full justify-center items-center">
+        <img src={load} alt="loading" className="w-[300px]" loading="lazy" />
+
+        <h1 className="font-bold text-[rgb(95,111,255)] text-2xl">Learning Management System</h1>
       </div>
     )
+
   }
 
   return (
@@ -34,11 +39,11 @@ function App() {
         <Route path='/auth' element={<RouteGuard element={<AuthPage />} authenticated={auth?.authenticate} user={auth?.user} />} />
 
         <Route path='/instructor' element={<RouteGuard element={<InstructorDashboardPage />} authenticated={auth?.authenticate} user={auth?.user} />} />
- 
+
         <Route path='/instructor/create-new-course' element={<RouteGuard element={<AddNewCoursePage />} authenticated={auth?.authenticate} user={auth?.user} />} />
-  
+
         <Route path='/instructor/edit-course/:courseId' element={<RouteGuard element={<AddNewCoursePage />} authenticated={auth?.authenticate} user={auth?.user} />} />
-  
+
         <Route path='/' element={<RouteGuard element={<StudentViewCommonLayout />} authenticated={auth?.authenticate} user={auth?.user} />}>
 
           <Route path='' element={<StudentHomePage />} />
@@ -57,7 +62,7 @@ function App() {
 
         </Route>
 
-        <Route path='*' element={<NotFound />}/>
+        <Route path='*' element={<NotFound />} />
 
 
       </Routes>

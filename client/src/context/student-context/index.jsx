@@ -7,7 +7,8 @@ export default function StudentProvider({children}){
 
     const [studentViewCoursesList, setStudentViewCoursesList] = useState([])
 
-    const [loadingState, setLoadingState] = useState(true)
+    const [loadingState, setLoadingState] = useState(true);
+    const [loadingStateBought, setLoadingStateBought] = useState(true);
 
     const [studentViewCourseDetails, setStudentViewCourseDetails] = useState(null)
 

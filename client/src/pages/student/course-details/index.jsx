@@ -11,6 +11,7 @@ import { checkCoursePurchaseInfoService, createPaymentService, fetchStudentViewC
 import { CheckCircle, GlobeIcon, LockIcon, PlayCircle, PlayCircleIcon } from 'lucide-react'
 import React, { useContext, useEffect, useState } from 'react'
 import { Navigate, useLocation, useNavigate, useParams } from 'react-router-dom'
+import load from "../../../../public/load.gif"
 
 function StudentViewCourseDetailsPage() {
 
@@ -18,7 +19,7 @@ function StudentViewCourseDetailsPage() {
 
     const navigate = useNavigate()
 
-    const {auth} = useContext(AuthContext)
+    const { auth } = useContext(AuthContext)
 
     const [displayCurrentVideoFreePreview, setDisplayCurrentVideoFreePreview] = useState(null)
 
@@ -34,7 +35,7 @@ function StudentViewCourseDetailsPage() {
     async function fetchStudentViewCourseDetails() {
         const checkCoursePurchaseInfoResponse = await checkCoursePurchaseInfoService(currentCourseDetailsId, auth?.user?._id)
 
-        if(checkCoursePurchaseInfoResponse?.success && checkCoursePurchaseInfoResponse?.data){
+        if (checkCoursePurchaseInfoResponse?.success && checkCoursePurchaseInfoResponse?.data) {
             navigate(`/course-progress/${currentCourseDetailsId}`)
             return
         }
@@ -54,8 +55,8 @@ function StudentViewCourseDetailsPage() {
         setDisplayCurrentVideoFreePreview(getCurrentVideoInfo)
     }
 
-    async function handleCreatePayment(){
-        const paymentPayload = { 
+    async function handleCreatePayment() {
+        const paymentPayload = {
             userId: auth?.user?._id,
             userName: auth?.user?.userName,
             userEmail: auth?.user?.userEmail,
@@ -74,7 +75,7 @@ function StudentViewCourseDetailsPage() {
         }
         const response = await createPaymentService(paymentPayload)
 
-        if(response.success){
+        if (response.success) {
             sessionStorage.setItem("currentOrderId", JSON.stringify(response?.data?.orderId))
             setApprovalUrl(response?.data?.approvalUrl)
         }
@@ -111,15 +112,23 @@ function StudentViewCourseDetailsPage() {
 
     }, [location.pathname]);
 
-    if (loadingState) return <Skeleton />
 
 
-
-    if(approvalUrl !== ""){
+    if (approvalUrl !== "") {
         window.location.href = approvalUrl
     }
 
     const getIndexOfFreePreview = studentViewCourseDetails !== null ? studentViewCourseDetails?.curriculum.findIndex(item => item.freePreview) : -1
+
+    if (loadingState) {
+        return (
+            <div className="flex flex-col h-[100vh] w-full justify-center items-center">
+                <img src={load} alt="loading" className="w-[150px]" loading="lazy" />
+
+                <h1 className="font-bold text-[rgb(95,111,255)] text-lg">Learning Management System</h1>
+            </div>
+        )
+    }
 
     return (
         <div className='mx-auto p-4'>
@@ -232,7 +241,7 @@ function StudentViewCourseDetailsPage() {
 
                     <div className="flex flex-col gap-2">
                         {
-                            studentViewCourseDetails?.curriculum.filter(item => item.freePreview).map(filteredItem => <p className={`cursor-pointer text-[16px] font-medium flex gap-1 p-2 rounded ${displayCurrentVideoFreePreview?.title === filteredItem?.title ? "bg-slate-200" : ""}`} key={filteredItem?._id} onClick={() =>handleSetFreePreview(filteredItem)}><PlayCircleIcon />{filteredItem?.title}</p>)
+                            studentViewCourseDetails?.curriculum.filter(item => item.freePreview).map(filteredItem => <p className={`cursor-pointer text-[16px] font-medium flex gap-1 p-2 rounded ${displayCurrentVideoFreePreview?.title === filteredItem?.title ? "bg-slate-200" : ""}`} key={filteredItem?._id} onClick={() => handleSetFreePreview(filteredItem)}><PlayCircleIcon />{filteredItem?.title}</p>)
                         }
                     </div>
 

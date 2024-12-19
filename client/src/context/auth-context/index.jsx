@@ -1,8 +1,9 @@
 import { Skeleton } from "@/components/ui/skeleton";
 import { initialSignInFormData, initialSignUpFormData } from "@/config";
 import { checkAuthService, loginInService, registerService } from "@/services";
-import { Loader } from "lucide-react";
+import { LoaderCircleIcon } from "lucide-react";
 import { createContext, useEffect, useState } from "react";
+import load from "../../../public/load.gif"
 
 export const AuthContext = createContext(null)
 
@@ -91,8 +92,10 @@ export default function AuthProvider({ children }) {
 
     if(loading){
         return (
-            <div className="flex h-screen w-full justify-center items-center">
-              <Loader size={130} className='animate-spin'/>
+            <div className="flex flex-col h-[100vh] w-full justify-center items-center">
+              <img src={load} alt="loading" className="w-[300px]" loading="lazy" />
+
+              <h1 className="font-bold text-[rgb(95,111,255)] text-2xl">Learning Management System</h1>
             </div>
           )
     }
